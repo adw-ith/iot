@@ -20,3 +20,9 @@ export interface User{
         number:number;
     }[];
 }
+
+export interface Request{
+    component_name:string;
+    number:number;
+    membership_id:string;
+}

@@ -4,9 +4,10 @@ import clientPromise from "@/lib/mongodb";
 export async function POST(req: any, res: any) {
   //@ts-ignore
   const client = await clientPromise;
-  const db = client.db("data");
+  const db =await client.db("data");
   const { membership_id, password } = await req.json();
-  const user = db.collection("users").findOne({ membership_id, password });
+  console.log(`member is ${membership_id} password is ${password}`)
+  const user =await db.collection("users").findOne({membership_id:membership_id,password:password});
   console.log(user);
   if (user) {
     return new Response(
