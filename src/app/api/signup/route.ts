@@ -25,8 +25,8 @@ export async function POST(req: any, res: any) {
   const newUser = await db
     .collection("users")
     .insertOne({ membership_id, password });
-
-  if (newUser.insertedCount === 1) {
+  console.log(newUser)
+  if (newUser.insertedId) {
     return new Response(
       JSON.stringify({
         message: "Signup successful",
@@ -44,7 +44,7 @@ export async function POST(req: any, res: any) {
         message: "Signup failed",
       }),
       {
-        status: 500,
+        status: 444,
         headers: {
           "Content-Type": "application/json",
         },
