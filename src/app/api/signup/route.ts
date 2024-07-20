@@ -6,12 +6,30 @@ export async function POST(req: any, res: any) {
   const client = await clientPromise;
   const db = client.db("data");
   const { membership_id, password } = await req.json();
-  const user = db.collection("users").findOne({ membership_id, password });
-  console.log(user);
-  if (user) {
+
+  const existingUser = await db.collection("users").findOne({ membership_id });
+  if (existingUser) {
     return new Response(
       JSON.stringify({
-        message: "login success",
+        message: "User already exists",
+      }),
+      {
+        status: 300,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
+
+  const newUser = await db
+    .collection("users")
+    .insertOne({ membership_id, password });
+
+  if (newUser.insertedCount === 1) {
+    return new Response(
+      JSON.stringify({
+        message: "Signup successful",
       }),
       {
         status: 200,
@@ -23,10 +41,10 @@ export async function POST(req: any, res: any) {
   } else {
     return new Response(
       JSON.stringify({
-        message: "user does'nt exist",
+        message: "Signup failed",
       }),
       {
-        status: 300,
+        status: 500,
         headers: {
           "Content-Type": "application/json",
         },
