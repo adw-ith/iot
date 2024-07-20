@@ -1,6 +1,6 @@
 // lib/mongodb.js
 
-import { MongoClient } from "mongodb";
+import { MongoClient } from "../../node_modules/mongodb/mongodb";
 
 const uri = process.env.MONGO_URI;
 let client;
