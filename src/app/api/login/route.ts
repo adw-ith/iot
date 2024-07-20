@@ -12,23 +12,24 @@ export async function POST(req:any,res:any)
     {
         return new Response(
             JSON.stringify({
-              message: "user does'nt exist",
+              message: "login success",
             }),
             {
-              status: 300,
+              status: 200,
               headers: {
                 "Content-Type": "application/json",
               },
             }
           );
+       
     }
     else{
         return new Response(
             JSON.stringify({
-              message: "login success",
+              message: "user does'nt exist",
             }),
             {
-              status: 200,
+              status: 300,
               headers: {
                 "Content-Type": "application/json",
               },
