@@ -1,19 +1,19 @@
-// contexts/AuthContext.tsx
 "use client";
 import { createContext, useState, useContext, ReactNode } from "react";
+import { User } from "@/types/types";
 
 interface AuthContextType {
-  signedIn: boolean;
-  setSignedIn: (value: boolean) => void;
+  user: User | undefined;
+  setUser: (value: User) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [signed, setSigned] = useState(false);
+  const [user, setUser] = useState<User | undefined>(undefined);
 
   return (
-    <AuthContext.Provider value={{ signed, setSigned }}>
+    <AuthContext.Provider value={{ user, setUser }}>
       {children}
     </AuthContext.Provider>
   );
