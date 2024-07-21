@@ -13,6 +13,7 @@ export async function POST(req: any, res: any) {
     return new Response(
       JSON.stringify({
         message: "login success",
+        user:user
       }),
       {
         status: 200,
