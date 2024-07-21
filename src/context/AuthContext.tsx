@@ -1,6 +1,7 @@
 "use client";
 import { createContext, useState, useContext, ReactNode } from "react";
 import { User } from "@/types/types";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 interface AuthContextType {
   user: User | undefined;
@@ -10,8 +11,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | undefined>(undefined);
-
+  const [user, setUser] = useLocalStorage<User | undefined>("user", undefined);
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       {children}

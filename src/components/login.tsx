@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import axios from "axios";
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 const loginUser = async (membership_id: string, password: string) => {
   try {
@@ -8,7 +10,6 @@ const loginUser = async (membership_id: string, password: string) => {
       membership_id,
       password,
     });
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("Login error:", error);
@@ -20,12 +21,16 @@ export default function Login() {
   const [membershipId, setMembershipId] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const { setUser } = useAuth();
+  const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const data = await loginUser(membershipId, password);
       setMessage(data.message);
+      setUser(data.user);
+      router.push("/borrow");
     } catch (error) {
       setMessage("Login failed. Please try again.");
     }
@@ -35,7 +40,7 @@ export default function Login() {
     <div className="flex flex-col">
       <form
         onSubmit={handleLogin}
-        className="p-8 bg-gray-900 rounded-lg min-w-[360px] text-center"
+        className="p-8 bg-gray-950 rounded-lg min-w-[360px] text-center"
       >
         <div className="text-xl pb-8 font-bold text-white">Login</div>
         <input
