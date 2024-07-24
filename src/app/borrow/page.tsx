@@ -2,7 +2,7 @@
 
 import { useAuth } from "@/context/AuthContext";
 import { useState, useEffect } from "react";
-import classNames from "classnames";
+
 import Available from "@/components/available";
 import { Component } from "@/types/types";
 import axios from "axios";
@@ -53,13 +53,15 @@ export default function Borrow() {
               <div
                 key={index}
                 onClick={() => setTab(index)}
-                className={classNames(
-                  "border-2 border-gray-300 font-bold px-4 py-2 cursor-pointer",
-                  {
-                    "bg-slate-300 text-black": tab === index,
-                    "hover:bg-gray-200 hover:text-black": tab !== index,
-                  }
-                )}
+                // className={classNames(
+                //   "border-2 border-gray-300 font-bold px-4 py-2 cursor-pointer",
+                //   {
+                //     "bg-slate-300 text-black": tab === index,
+                //     "hover:bg-gray-200 hover:text-black": tab !== index,
+                //   }
+                // )}
+                className={`border-2 border-gray-300 font-bold px-4 py-2 cursor-pointer
+                 ${tab===index?"bg-slate-300 text-black":"hover:bg-gray-200 hover:text-black"}`}
               >
                 {tabName}
               </div>
