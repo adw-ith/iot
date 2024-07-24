@@ -8,13 +8,15 @@ export async function GET(req: any, res: any) {
   const membership_id=req.nextUrl.searchParams.get("membership_id");
   if(membership_id)
   {
-const user =await db.collection("users").findOne({membership_id:membership_id});
+const user =await db.collection("users").findOne({membership_id:membership_id},
+  { projection: { password: 0 } });
+const [password,...rest]=user
   if(user)
   {
     return new Response(
         JSON.stringify({
           message: "user found",
-          user:user
+          user:rest
         }),
         {
           status: 200,
@@ -41,7 +43,7 @@ const user =await db.collection("users").findOne({membership_id:membership_id});
   }
 }
 else{
-    const users=await db.collection("users").find({}).toArray()
+    const users=await db.collection("users").find({},{ projection: { password: 0 } }).toArray()
     return new Response(
         JSON.stringify({
           message: "all users",
