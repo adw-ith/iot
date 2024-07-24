@@ -24,7 +24,7 @@ export async function POST(req: any, res: any) {
 
   const newComponent = await db
     .collection("components")
-    .insertOne({ name, number });
+    .insertOne({ name, number, total: number });
   if (newComponent.insertedId) {
     return new Response(
       JSON.stringify({

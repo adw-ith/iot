@@ -1,5 +1,6 @@
 export interface Component {
   name: string;
+  total: number;
   number: number;
   borrowers: {
     membership_id: string;
@@ -21,6 +22,7 @@ export interface User {
     | {
         name: string;
         number: number;
+        date: Date;
       }[]
     | [];
 }
