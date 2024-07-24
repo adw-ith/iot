@@ -45,7 +45,7 @@ export default function Borrow() {
     <div>
       <Navbar></Navbar>
 
-      <div className="text-white bg-gray-900">
+      <div className="text-white bg-green-800">
         <div className="relative p-4 sm:p-8 sm:pb-12 border-b-2 border-gray-300">
           <div className="text-2xl font-bold">{tabs[tab]}</div>
           <div className="sm:absolute flex flex-wrap bottom-0 right-0">
