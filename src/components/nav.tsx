@@ -1,19 +1,5 @@
 "use client";
-
-import React from "react";
-import { useAuth } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
-
 export default function Navbar() {
-  const { user, setUser } = useAuth();
-  const router = useRouter();
-
-  const handleLogout = () => {
-    //@ts-ignore
-    setUser(undefined);
-    router.push("/");
-  };
-
   return (
     <nav className="bg-gray-800 text-white p-2">
       <div className="container mx-auto flex items-center justify-between">
@@ -27,18 +13,8 @@ export default function Navbar() {
           </a>
         </div>
 
-        <div className="flex items-center space-x-4">
-          {
-            <button
-              onClick={() => handleLogout()}
-              className="bg-red-500 px-4 py-1 rounded hover:bg-red-600"
-            >
-              Logout
-            </button>
-          }
-        </div>
+        <div className="flex items-center space-x-4"></div>
 
-        {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center">
           <button
             type="button"
