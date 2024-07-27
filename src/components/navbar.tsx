@@ -15,7 +15,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-gray-800 text-white p-2">
+    <nav className="bg-gray-800 px-4 sm:px-12 text-white p-2">
       <div className="container mx-auto flex items-center justify-between">
         <div className="text-2xl font-bold">IOT</div>
         <div className="hidden md:flex space-x-4">
