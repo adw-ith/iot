@@ -17,7 +17,32 @@ export async function POST(req: any, res: any) {
             const usersRes=await db.collection('components').updateOne(
                 { name:borrowed_component.name},
                 { $inc: { number: (borrowed_component.number)}  })
+            if(usersRes.acknowledged)
+            {
+              return new Response(
+                JSON.stringify({
+                  message: "update success",
+                }),
+                {
+                  status: 200,
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                }
+              );  
+            }
         }
+        return new Response(
+          JSON.stringify({
+            message: "unsuccessful",
+          }),
+          {
+            status: 300,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );  
   }
   catch(error)
   {
