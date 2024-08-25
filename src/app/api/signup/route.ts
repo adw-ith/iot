@@ -6,7 +6,7 @@ export async function POST(req: any, res: any) {
   //@ts-ignore
   const client = await clientPromise;
   const db = client.db("data");
-  const { membership_id, password } = await req.json();
+  const { membership_id, password, role, name, email } = await req.json();
 
   const existingUser = await db.collection("users").findOne({ membership_id });
   if (existingUser) {
@@ -24,10 +24,11 @@ export async function POST(req: any, res: any) {
   }
 
   const user: User = {
-    name: "",
-    email: "",
+    name: name ?? "",
+    email: email ?? "",
     membership_id,
     password,
+    role: role ?? "user",
     requested_components: [],
     borrowed_components: [],
   };

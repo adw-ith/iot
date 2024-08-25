@@ -30,7 +30,8 @@ export default function Login() {
       const data = await loginUser(membershipId, password);
       setMessage(data.message);
       setUser(data.user);
-      router.push("/borrow");
+      if (data.user.role == "user") router.push("/borrow");
+      else router.push("/admin");
     } catch (error) {
       setMessage("Login failed. Please try again.");
     }
